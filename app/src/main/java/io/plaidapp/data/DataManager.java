@@ -460,6 +460,8 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
         final Shot s = new Shot.Builder()
                 .setId(1L)
                 .setTitle("Amilcar")
+                .setCommentsCount(10)
+                .setLikesCount(10)
                 .setHeight(1000)
                 .setWidth(1000)
                 .setImages(new Images(null, "https://picsum.photos/id/1011/1000/1000", "")).build();
@@ -467,6 +469,8 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
         final Shot s1 = new Shot.Builder()
                 .setId(3L)
                 .setTitle("Amilcar")
+                .setCommentsCount(10)
+                .setLikesCount(10)
                 .setHeight(1000)
                 .setWidth(1000)
                 .setImages(new Images(null, "https://picsum.photos/id/1012/1000/1000", "")).build();
@@ -474,6 +478,8 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
         final Shot s2 = new Shot.Builder()
                 .setId(2L)
                 .setTitle("Amilcar")
+                .setCommentsCount(10)
+                .setLikesCount(10)
                 .setHeight(1000)
                 .setWidth(1000)
                 .setImages(new Images(null, "https://picsum.photos/id/1013/1000/1000", "")).build();

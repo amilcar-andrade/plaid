@@ -627,7 +627,9 @@ public class DribbbleShot extends Activity {
                 }
             }
 
-            @Override public void onFailure(Call<List<Comment>> call, Throwable t) { }
+            @Override public void onFailure(Call<List<Comment>> call, Throwable t) {
+                System.out.println("");
+            }
         });
     }
 

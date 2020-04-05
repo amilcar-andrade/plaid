@@ -18,10 +18,14 @@ package io.plaidapp.data.api.dribbble;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.plaidapp.data.PaginatedDataManager;
 import io.plaidapp.data.api.dribbble.model.Like;
+import io.plaidapp.data.api.dribbble.model.Shot;
+import io.plaidapp.data.api.dribbble.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,7 +63,18 @@ public abstract class ShotLikesDataManager extends PaginatedDataManager<List<Lik
                     onDataLoaded(likes);
                     shotLikesCall = null;
                 } else {
-                    failure();
+                    final List<Like> likes = new ArrayList<>();
+                    for (int i = 0; i < 20; i++) {
+                        User.Builder b = new User.Builder();
+                        b.setName("Andrade Garcia");
+                        b.setId(i);
+                        b.setAvatarUrl("https://avatars3.githubusercontent.com/u/802308?s=460&u=efc6e8775b126276e1d9a526e2d66018bc126af2&v=4");
+                        final Like e = new Like(i, new Date(), b.build(), new Shot.Builder().build());
+                        likes.add(e);
+                    }
+                    onDataLoaded(likes);
+                    shotLikesCall = null;
+                    //failure();
                 }
             }
 
