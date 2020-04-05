@@ -185,7 +185,8 @@ public class HomeActivity extends Activity {
         grid.addOnScrollListener(new InfiniteScrollListener(layoutManager, dataManager) {
             @Override
             public void onLoadMore() {
-                dataManager.loadAllDataSources();
+                // Stop fetching more til we figure it out how to provide something!
+                //dataManager.loadAllDataSources();
             }
         });
         grid.setHasFixedSize(true);

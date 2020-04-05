@@ -26,6 +26,7 @@ public class FourThreeImageView extends ForegroundImageView {
 
     public FourThreeImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setScaleType(ScaleType.CENTER_CROP);
     }
 
     @Override

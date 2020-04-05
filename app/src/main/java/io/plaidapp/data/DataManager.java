@@ -19,6 +19,7 @@ package io.plaidapp.data;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import java.util.Map;
 import io.plaidapp.data.api.designernews.model.Story;
 import io.plaidapp.data.api.dribbble.DribbbleSearchService;
 import io.plaidapp.data.api.dribbble.DribbbleService;
+import io.plaidapp.data.api.dribbble.model.Images;
 import io.plaidapp.data.api.dribbble.model.Like;
 import io.plaidapp.data.api.dribbble.model.Shot;
 import io.plaidapp.data.api.dribbble.model.User;
@@ -96,12 +98,14 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
             final int page = getNextPageIndex(source.key);
             switch (source.key) {
                 case SourceManager.SOURCE_DESIGNER_NEWS_POPULAR:
-                    loadDesignerNewsTopStories(page);
+                    // Fix later with credentials
+                    //loadDesignerNewsTopStories(page);
                     break;
                 case SourceManager.SOURCE_DESIGNER_NEWS_RECENT:
                     loadDesignerNewsRecent(page);
                     break;
                 case SourceManager.SOURCE_DRIBBBLE_POPULAR:
+                    // Mock this!
                     loadDribbblePopular(page);
                     break;
                 case SourceManager.SOURCE_DRIBBBLE_FOLLOWING:
@@ -127,7 +131,8 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
                     break;
                 default:
                     if (source instanceof Source.DribbbleSearchSource) {
-                        loadDribbbleSearch((Source.DribbbleSearchSource) source, page);
+                        // Mock this!
+                        //loadDribbbleSearch((Source.DribbbleSearchSource) source, page);
                     } else if (source instanceof Source.DesignerNewsSearchSource) {
                         loadDesignerNewsSearch((Source.DesignerNewsSearchSource) source, page);
                     }
@@ -242,7 +247,8 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
                 if (response.isSuccessful()) {
                     sourceLoaded(response.body(), page, SourceManager.SOURCE_DRIBBBLE_POPULAR);
                 } else {
-                    loadFailed(SourceManager.SOURCE_DRIBBBLE_POPULAR);
+                    sourceLoaded(createFake(), page, SourceManager.SOURCE_DRIBBBLE_POPULAR);
+                    //loadFailed(SourceManager.SOURCE_DRIBBBLE_POPULAR);
                 }
             }
 
@@ -447,5 +453,33 @@ public abstract class DataManager extends BaseDataManager<List<? extends PlaidIt
             }
         });
         inflight.put(SourceManager.SOURCE_PRODUCT_HUNT, postsCall);
+    }
+
+    private static List<Shot> createFake() {
+        List<Shot> shots = new ArrayList<>();
+        final Shot s = new Shot.Builder()
+                .setId(1L)
+                .setTitle("Amilcar")
+                .setHeight(1000)
+                .setWidth(1000)
+                .setImages(new Images(null, "https://picsum.photos/id/1011/1000/1000", "")).build();
+
+        final Shot s1 = new Shot.Builder()
+                .setId(3L)
+                .setTitle("Amilcar")
+                .setHeight(1000)
+                .setWidth(1000)
+                .setImages(new Images(null, "https://picsum.photos/id/1012/1000/1000", "")).build();
+
+        final Shot s2 = new Shot.Builder()
+                .setId(2L)
+                .setTitle("Amilcar")
+                .setHeight(1000)
+                .setWidth(1000)
+                .setImages(new Images(null, "https://picsum.photos/id/1013/1000/1000", "")).build();
+        shots.add(s);
+        shots.add(s1);
+        shots.add(s2);
+        return shots;
     }
 }
